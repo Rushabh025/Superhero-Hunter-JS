@@ -1,3 +1,4 @@
+// api call function
 async function getUsers() {
   try {
 
@@ -15,6 +16,7 @@ async function getUsers() {
       },  
     };
 
+  // fetching data from api
   const dataList = await fetch(apiUrl, options)
     .then(response => {
       if (!response.ok) {
@@ -23,6 +25,7 @@ async function getUsers() {
       return response.json();
     });
 
+    // returning the data
     return dataList;
 
   }catch (error) {
@@ -30,9 +33,10 @@ async function getUsers() {
   }
 }
 
-
+// calling the api function
 getUsers().then(dataList => {
   const cardsContainer = document.querySelector('#cards-container');
+    // looping through the data for sowing results on main page
     for (let i = 0; i < Object.keys(dataList.data.results).length; i++) {
 
       const div1 = document.createElement('div');
@@ -41,6 +45,7 @@ getUsers().then(dataList => {
       const div2 = document.createElement('div');
       const heroName = document.createElement('h5');
       const link = document.createElement('a');
+      link.href= 'pages/details.html';
       
       div1.classList = 'col'
       div.classList = 'card'
@@ -52,19 +57,31 @@ getUsers().then(dataList => {
       image.src = dataList.data.results[i].thumbnail.path+'.jpg';
       heroName.innerText = `Name: ${dataList.data.results[i].name}`
       link.textContent = 'More Details'
-
+      
+      // appending the elements in sequence 
+      cardsContainer.appendChild(div1)
       div1.appendChild(div)
       div.appendChild(image)
+      div.appendChild(div2)
       div2.appendChild(heroName)
       div2.appendChild(link)
-      cardsContainer.appendChild(div1)
-      cardsContainer.appendChild(div)
-      cardsContainer.appendChild(div2)
     }
 });
 
+// adding urls butons
+for(var i in json){
+  var key=Object.keys(json[i])[0];
+  var a=document.createElement('a');
+  a.href=key;
+  a.innerHTML=key;
+  document.querySelector('body').appendChild(a);
+}
+var hyperlinks=document.getElementsByTagName('a');
+for(i=0;i<hyperlinks.length;i++){
+hyperlinks[i].onclick=function(e){
+ e.preventDefault();
+ var href=this.getAttribute('href');
+ alert(href);
+}
+}
 
-//   const outputElement = document.getElementById('data');
-
-// const apiUrl2 = `http://gateway.marvel.com/v1/public/characters?apikey=${publicApiKey}&callback=${publicApiKey}`;
-// fetch()
