@@ -15,32 +15,52 @@ async function getUsers() {
       },  
     };
 
-  const data = await fetch(apiUrl, options)
+  const dataList = await fetch(apiUrl, options)
     .then(response => {
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
       return response.json();
     });
-    // .then(response =>{
-    //   console.log(response);
-    // });
 
-    return data;
+    return dataList;
 
   }catch (error) {
     console.log(error);
   }
 }
 
-getUsers().then(data => {
-  console.log(data);
 
-  const preElement = document.getElementById('json-data');
+getUsers().then(dataList => {
+  const cardsContainer = document.querySelector('#cards-container');
+    for (let i = 0; i < Object.keys(dataList.data.results).length; i++) {
 
-  preElement.style.fontSize = '18px';
-  
-  preElement.innerHTML = JSON.stringify(data);
+      const div1 = document.createElement('div');
+      const div = document.createElement('div');
+      const image = document.createElement('img');
+      const div2 = document.createElement('div');
+      const heroName = document.createElement('h5');
+      const link = document.createElement('a');
+      
+      div1.classList = 'col'
+      div.classList = 'card'
+      image.classList = 'card-img-top'
+      div2.classList = 'card-body';
+      heroName.classList = 'card-title'
+      link.classList = 'btn btn-primary'
+
+      image.src = dataList.data.results[i].thumbnail.path+'.jpg';
+      heroName.innerText = `Name: ${dataList.data.results[i].name}`
+      link.textContent = 'More Details'
+
+      div1.appendChild(div)
+      div.appendChild(image)
+      div2.appendChild(heroName)
+      div2.appendChild(link)
+      cardsContainer.appendChild(div1)
+      cardsContainer.appendChild(div)
+      cardsContainer.appendChild(div2)
+    }
 });
 
 
