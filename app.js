@@ -36,6 +36,7 @@ async function getUsers() {
 // calling the api function
 getUsers().then(dataList => {
   const cardsContainer = document.querySelector('#cards-container');
+
     // looping through the data for sowing results on main page
     for (let i = 0; i < Object.keys(dataList.data.results).length; i++) {
 
@@ -46,7 +47,18 @@ getUsers().then(dataList => {
       const heroName = document.createElement('h5');
       const link = document.createElement('a');
       link.href= 'pages/details.html';
+
+      // Set link properties
+      link.href = 'details.html';
+      link.innerHTML = dataList.data.results[i].name;
       
+      link.addEventListener('click', function (e) {
+        e.preventDefault();
+        var personData = dataList.data.results[i];
+        displayPersonData(personData);
+        navigateToDetailsPage(personData);
+      });
+
       div1.classList = 'col'
       div.classList = 'card'
       image.classList = 'card-img-top'
@@ -68,20 +80,23 @@ getUsers().then(dataList => {
     }
 });
 
-// adding urls butons
-for(var i in json){
-  var key=Object.keys(json[i])[0];
-  var a=document.createElement('a');
-  a.href=key;
-  a.innerHTML=key;
-  document.querySelector('body').appendChild(a);
+function displayPersonData(data) {
+
+   // adding urls butons
+  // var personDataContainer = document.getElementById('personDataContainer');
+
+  // personDataContainer.innerHTML = '<p>' + data + '</p>';
+
+  // Extract and format the relevant data from 'data' to display on the page
+  // For example, you can update 'personDataContainer.innerHTML' with the formatted content
+  console.log(data); // Log the data to the console for now
 }
-var hyperlinks=document.getElementsByTagName('a');
-for(i=0;i<hyperlinks.length;i++){
-hyperlinks[i].onclick=function(e){
- e.preventDefault();
- var href=this.getAttribute('href');
- alert(href);
-}
+
+function navigateToDetailsPage(characterData) {
+  const queryParams = new URLSearchParams();
+  queryParams.set('characterData', JSON.stringify(characterData));
+
+  // Navigate to the details.html page with query parameters
+  window.location.href = `details.html?${queryParams.toString()}`;
 }
 
