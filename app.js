@@ -33,12 +33,18 @@ async function getUsers() {
   }
 }
 
+// suggestions array
+const characters = ['ironman'];
+
 // calling the api function
 getUsers().then(dataList => {
   const cardsContainer = document.querySelector('#cards-container');
 
     // looping through the data for sowing results on main page
     for (let i = 0; i < Object.keys(dataList.data.results).length; i++) {
+
+      // pushing names in array for suggestion
+      characters.push(dataList.data.results[i].name);
 
       const div1 = document.createElement('div');
       const div = document.createElement('div');
@@ -81,14 +87,6 @@ getUsers().then(dataList => {
 });
 
 function displayPersonData(data) {
-
-   // adding urls butons
-  // var personDataContainer = document.getElementById('personDataContainer');
-
-  // personDataContainer.innerHTML = '<p>' + data + '</p>';
-
-  // Extract and format the relevant data from 'data' to display on the page
-  // For example, you can update 'personDataContainer.innerHTML' with the formatted content
   console.log(data); // Log the data to the console for now
 }
 
@@ -100,3 +98,35 @@ function navigateToDetailsPage(characterData) {
   window.location.href = `details.html?${queryParams.toString()}`;
 }
 
+// auto complete
+
+ // Get references to DOM elements
+ const searchInput = document.getElementById('searchInput');
+ const characterList = document.getElementById('characterList');
+
+ // Function to filter characters based on search query
+ function filterCharacters(query) {
+   // Clear the previous results
+   characterList.innerHTML = '';
+
+   // Filter characters that contain the search query
+   const filteredCharacters = characters.filter(character => 
+     character.toLowerCase().includes(query.toLowerCase())
+   );
+
+   // Display filtered characters
+   filteredCharacters.forEach(character => {
+     const li = document.createElement('li');
+     li.textContent = character;
+     li.classList.add('characterItem');
+     characterList.appendChild(li);
+   });
+ }
+
+ // Add event listener for input changes
+ searchInput.addEventListener('input', function() {
+   filterCharacters(this.value);
+ });
+
+ // Initial call to display all characters
+ filterCharacters('');
