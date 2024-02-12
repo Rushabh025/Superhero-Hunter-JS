@@ -39,6 +39,9 @@ const characters = ['ironman'];
 // calling the api function
 getUsers().then(dataList => {
   const cardsContainer = document.querySelector('#cards-container');
+  const cart = document.getElementById('cart');
+  const totalElement = document.getElementById('total'); 
+  const selectedItems = {};
 
     // looping through the data for sowing results on main page
     for (let i = 0; i < Object.keys(dataList.data.results).length; i++) {
@@ -51,6 +54,11 @@ getUsers().then(dataList => {
       const image = document.createElement('img');
       const div2 = document.createElement('div');
       const heroName = document.createElement('h5');
+      const addButton = document.createElement('button');
+      addButton.addEventListener('click', () => {
+        addItem(itemId);
+      });
+
       const link = document.createElement('a');
       link.href= 'pages/details.html';
 
@@ -71,10 +79,12 @@ getUsers().then(dataList => {
       div2.classList = 'card-body';
       heroName.classList = 'card-title'
       link.classList = 'btn btn-primary'
+      addButton.classList = 'btn btn-primary'
 
       image.src = dataList.data.results[i].thumbnail.path+'.jpg';
-      heroName.innerText = `Name: ${dataList.data.results[i].name}`
+      heroName.innerText = `${dataList.data.results[i].name}`
       link.textContent = 'More Details'
+      addButton.textContent = 'Favourite'
       
       // appending the elements in sequence 
       cardsContainer.appendChild(div1)
@@ -83,6 +93,7 @@ getUsers().then(dataList => {
       div.appendChild(div2)
       div2.appendChild(heroName)
       div2.appendChild(link)
+      div2.appendChild(addButton)
     }
 });
 
@@ -130,3 +141,22 @@ function navigateToDetailsPage(characterData) {
 
  // Initial call to display all characters
  filterCharacters('');
+
+
+ // Function to update the cart display
+function updateCartDisplay() {
+  // Clear previous cart content
+  cart.innerHTML = '';
+
+  // Display selected items in the cart
+  selectedItems.forEach(item => {
+    const cartItem = document.createElement('div');
+    cartItem.textContent = item.name;
+    // You can customize the cart item display further based on your needs
+    cart.appendChild(cartItem);
+  });
+
+  // Calculate and display the total
+  const total = selectedItems.length; // Modify this based on your cart logic
+  totalElement.textContent = `Total: ${total}`;
+}
