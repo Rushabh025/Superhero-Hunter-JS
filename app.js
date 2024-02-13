@@ -58,6 +58,7 @@ getUsers().then(dataList => {
         var favHero = dataList.data.results[i].name;
         favList.push(favHero);
         // addFavHero(favHero);
+        this.disabled = true;
       });
 
       const link = document.createElement('a');
@@ -106,9 +107,13 @@ function showFavList(){
   }else{
     for(let i = 0; i < favList.length; i++){
       const li = document.createElement('li');
+      const removeButton = document.createElement('button');
       li.textContent = favList[i];
+      removeButton.classList = 'btn btn-primary'
+      removeButton.textContent = 'Delete'
       li.classList.add('characterItem');
       favHeroContainer.appendChild(li);
+      li.appendChild(removeButton);
       console.log(favList[i]);
     }
   }
