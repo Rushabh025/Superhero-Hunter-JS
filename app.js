@@ -34,14 +34,12 @@ async function getUsers() {
 }
 
 // suggestions array
-const characters = ['ironman'];
+const characters = [];
+const favList = [];
 
 // calling the api function
 getUsers().then(dataList => {
   const cardsContainer = document.querySelector('#cards-container');
-  const cart = document.getElementById('cart');
-  const totalElement = document.getElementById('total'); 
-  const selectedItems = {};
 
     // looping through the data for sowing results on main page
     for (let i = 0; i < Object.keys(dataList.data.results).length; i++) {
@@ -55,12 +53,15 @@ getUsers().then(dataList => {
       const div2 = document.createElement('div');
       const heroName = document.createElement('h5');
       const addButton = document.createElement('button');
-      addButton.addEventListener('click', () => {
-        addItem(itemId);
+      addButton.addEventListener('click', function (e) {
+        e.preventDefault();
+        var favHero = dataList.data.results[i].name;
+        favList.push(favHero);
+        // addFavHero(favHero);
       });
 
       const link = document.createElement('a');
-      link.href= 'pages/details.html';
+      link.href = 'pages/details.html';
 
       // Set link properties
       link.href = 'details.html';
@@ -96,6 +97,22 @@ getUsers().then(dataList => {
       div2.appendChild(addButton)
     }
 });
+
+// Function to update the cart display
+const favHeroContainer = document.querySelector('#FavList');
+function showFavList(){
+  if(favList.length == 0){
+    console.log('no list');
+  }else{
+    for(let i = 0; i < favList.length; i++){
+      const li = document.createElement('li');
+      li.textContent = favList[i];
+      li.classList.add('characterItem');
+      favHeroContainer.appendChild(li);
+      console.log(favList[i]);
+    }
+  }
+}
 
 function displayPersonData(data) {
   console.log(data); // Log the data to the console for now
@@ -141,22 +158,3 @@ function navigateToDetailsPage(characterData) {
 
  // Initial call to display all characters
  filterCharacters('');
-
-
- // Function to update the cart display
-function updateCartDisplay() {
-  // Clear previous cart content
-  cart.innerHTML = '';
-
-  // Display selected items in the cart
-  selectedItems.forEach(item => {
-    const cartItem = document.createElement('div');
-    cartItem.textContent = item.name;
-    // You can customize the cart item display further based on your needs
-    cart.appendChild(cartItem);
-  });
-
-  // Calculate and display the total
-  const total = selectedItems.length; // Modify this based on your cart logic
-  totalElement.textContent = `Total: ${total}`;
-}
