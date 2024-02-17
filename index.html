@@ -25,48 +25,18 @@
                 <form class="form-inline my-2 my-lg-0">
                     <input class="form-control mr-sm-2" type="text" id="searchInput" placeholder="Search Hero's..." aria-label="Search">
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    <ul id="characterList"></ul>
                 </form>
             </div>
         </nav>
     </header>
     <!--Make sure the form has the autocomplete function switched off:-->
     <main role="main" >
-        <div class="container-fluid">
-            <div class="row flex-xl-nowrap">
-                <ul id="characterList"></ul>
-                <div class="container" id="container">
-                    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" id="cards-container">
-                    </div>
-                </div>
-            </div>
-        </div>
         <div class="container">
-            <div class="row">
-                <div class="col-lg-4 col-md-6">
-                    <div class="flip-card">
-                        <div class="flip-card-inner">
-                            <div class="flip-card-front">
-                                <div class="card">
-                                    <img src=
-    "https://media.geeksforgeeks.org/wp-content/cdn-uploads/20230305182658/HTML-tutorial.jpg"
-                                        class="card-img-top" alt="Front Image">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Front Side</h5>
-                                        <p class="card-text">HTML</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="flip-card-back">
-                                <div class="card">
-                                    <img src="https://media.geeksforgeeks.org/wp-content/cdn-uploads/20230310153232/ReactJS-Tutorial.jpg"
-                                        class="card-img-top" alt="Back Image">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Back Side</h5>
-                                        <p class="card-text">React JS</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+            <div class="row align-items-start">     
+                <div class="container" id="container">        
+                    <div id="cards-container">
+                        
                     </div>
                 </div>
             </div>

@@ -46,56 +46,84 @@ getUsers().then(dataList => {
 
       // pushing names in array for suggestion
       characters.push(dataList.data.results[i].name);
+      counter = 0;
 
-      const div1 = document.createElement('div');
-      const div = document.createElement('div');
-      const image = document.createElement('img');
-      const div2 = document.createElement('div');
-      const heroName = document.createElement('h5');
-      const addButton = document.createElement('button');
-      addButton.addEventListener('click', function (e) {
-        e.preventDefault();
-        var favHero = dataList.data.results[i].name;
-        favList.push(favHero);
-        // addFavHero(favHero);
-        this.disabled = true;
-      });
+      while(counter < 5){
+        const rowdiv = document.createElement('div');
+        const coldiv = document.createElement('div');
+        const cardmaindiv = document.createElement('div');
+        const cardInnerdiv = document.createElement('div');
+        const imgDiv = document.createElement('div');
+        const image = document.createElement('img');
+        const cardBackdiv = document.createElement('div');
+        const heroName = document.createElement('h1');
+        const addButton = document.createElement('button');
+        addButton.addEventListener('click', function (e) {
+          e.preventDefault();
+          var favHero = dataList.data.results[i].name;
+          favList.push(favHero);
+          // addFavHero(favHero);
+          this.disabled = true;
+        });
 
-      const link = document.createElement('a');
-      link.href = 'pages/details.html';
+        const link = document.createElement('a');
+        link.href = 'pages/details.html';
 
-      // Set link properties
-      link.href = 'details.html';
-      link.innerHTML = dataList.data.results[i].name;
-      
-      link.addEventListener('click', function (e) {
-        e.preventDefault();
-        var personData = dataList.data.results[i];
-        displayPersonData(personData);
-        navigateToDetailsPage(personData);
-      });
+        // Set link properties
+        link.href = 'details.html';
+        link.innerHTML = dataList.data.results[i].name;
+        
+        link.addEventListener('click', function (e) {
+          e.preventDefault();
+          var personData = dataList.data.results[i];
+          displayPersonData(personData);
+          navigateToDetailsPage(personData);
+        });
 
-      div1.classList = 'col'
-      div.classList = 'card'
-      image.classList = 'card-img-top'
-      div2.classList = 'card-body';
-      heroName.classList = 'card-title'
-      link.classList = 'btn btn-primary'
-      addButton.classList = 'btn btn-primary'
+        rowdiv.classList = 'row';
+        coldiv.classList = 'col';
+        cardmaindiv.classList = 'flip-card'
+        cardInnerdiv.classList = 'flip-card-inner'
+        imgDiv.classList = 'flip-card-front';
+        image.style = 'width:300px;height:300px;'
+        cardBackdiv.classList = 'flip-card-back';
+        heroName.classList = 'card-title'
+        link.classList = 'btn btn-primary'
+        addButton.classList = 'btn btn-primary'
 
-      image.src = dataList.data.results[i].thumbnail.path+'.jpg';
-      heroName.innerText = `${dataList.data.results[i].name}`
-      link.textContent = 'More Details'
-      addButton.textContent = 'Favourite'
-      
-      // appending the elements in sequence 
-      cardsContainer.appendChild(div1)
-      div1.appendChild(div)
-      div.appendChild(image)
-      div.appendChild(div2)
-      div2.appendChild(heroName)
-      div2.appendChild(link)
-      div2.appendChild(addButton)
+        image.src = dataList.data.results[i].thumbnail.path+'.jpg';
+        heroName.innerText = `${dataList.data.results[i].name}`
+        link.textContent = 'More Details'
+        addButton.textContent = 'Favourite'
+
+        counter++;
+        if(counter == 4){
+          counter = 0;
+          // appending the elements in sequence
+          cardsContainer.appendChild(rowdiv)
+          rowdiv.appendChild(coldiv)
+          coldiv.appendChild(cardmaindiv)
+          cardmaindiv.appendChild(cardInnerdiv)
+          cardInnerdiv.appendChild(imgDiv)
+          imgDiv.appendChild(image)
+          cardInnerdiv.appendChild(cardBackdiv)
+          cardBackdiv.appendChild(heroName)
+          cardBackdiv.appendChild(link)
+          cardBackdiv.appendChild(addButton)
+
+        }else{
+          // appending the elements in sequence
+          cardsContainer.appendChild(coldiv)
+          coldiv.appendChild(cardmaindiv)
+          cardmaindiv.appendChild(cardInnerdiv)
+          cardInnerdiv.appendChild(imgDiv)
+          imgDiv.appendChild(image)
+          cardInnerdiv.appendChild(cardBackdiv)
+          cardBackdiv.appendChild(heroName)
+          cardBackdiv.appendChild(link)
+          cardBackdiv.appendChild(addButton)
+        }
+      }
     }
 });
 
