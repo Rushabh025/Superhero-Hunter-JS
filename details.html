@@ -5,17 +5,73 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Super hero details</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">    <!-- Linking the css file -->
-    <link rel="stylesheet" href="styles.css" type="text/css">
+    <link rel="stylesheet" href="details.css" type="text/css">
     <!-- Include CryptoJS from CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>
 </head>
 <body>
-    <div id="data">
-        hello
-    </div>
-    <div id="characterdetails"></div>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+            <div class="container">
+                <a class="navbar-brand" href="#">Super Hero Hunter</a>
+            </div>
+        </nav>
+    </header>
 
-    <p>Data provided by Marvel. © 2014 Marvel</p>
+    <main role="main">
+
+        <div id="characterdetails"></div>
+
+        <!-- Main jumbotron for a primary marketing message or call to action -->
+        <div class="jumbotron" bis_skin_checked="1">
+          <div class="container" bis_skin_checked="1">
+            <div class="row">            
+                <div class=" col-md-6 col-sm-12" >
+                    <h1 class="display-3" id = 'name'></h1>
+                    <p id = 'description'></p>
+                </div>
+                <div class=" col-md">
+                    <img class=" img-fluid" id="heroImage" src="http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg">
+                </div> 
+            </div> 
+          </div>
+        </div>
+  
+        <div class="container other" bis_skin_checked="1">
+          <!-- Example row of columns -->
+          <div class="row" bis_skin_checked="1">
+            <div class="col-md-4" bis_skin_checked="1">
+              <h2>Comics Name</h2>
+              <ul id="comicName">
+              </ul>
+            </div>
+            <div class="col-md-4" bis_skin_checked="1">
+              <h2>Series Name</h2>
+              <ul id="seriesName"></ul>
+            </div>
+            <div class="col-md-4" bis_skin_checked="1">
+              <h2>Stories Name</h2>
+              <ul id="storiesName"></ul>
+            </div>
+          </div>
+  
+          <hr>
+  
+        </div> <!-- /container -->
+  
+      </main>
+
+    <!-- START FOOTER DARK-->
+    <footer class="py-3 my-4 bg-dark">
+        <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Home</a></li>
+        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Features</a></li>
+        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Pricing</a></li>
+        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">FAQs</a></li>
+        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">About</a></li>
+        </ul>
+        <p class="text-center text-muted">Data provided by Marvel. © 2014 Marvel</p>
+    </footer>
     <!-- Linking the javascript file -->
     <script src="details.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

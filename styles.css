@@ -54,3 +54,69 @@ We have added the border property to demonstrate that the flip itself goes out o
     transform: rotateY(180deg);
   }
   
+  /* Navbar */
+.navbar {
+  background-color: #343a40; /* Dark background color */
+}
+
+.navbar-brand {
+  color: #fff !important; /* White text color */
+}
+
+.navbar-nav a {
+  color: #fff !important; /* White text color for navbar links */
+}
+
+.navbar-nav a:hover {
+  color: #17a2b8 !important; /* Hover color for navbar links */
+}
+
+/* Adjust the spacing for the search bar */
+.form-inline {
+  margin-right: 10px;
+}
+
+/* Style the search input and button */
+#searchInput {
+  background-color: #fff; /* White background color for search input */
+  color: #000; /* Black text color for search input */
+}
+
+.btn-outline-success {
+  color: #28a745; /* Green color for the search button text */
+  border-color: #28a745; /* Green color for the search button border */
+}
+
+.btn-outline-success:hover {
+  background-color: #28a745; /* Hover background color for the search button */
+  color: #fff; /* Hover text color for the search button */
+}
+
+.autocom-box {
+  position: absolute;
+  z-index: 9999;
+  width: 100%;
+  top: 100%; /* Position the suggestion list below the search bar */
+}
+
+.autocom-box ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  background: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ced4da;
+  max-height: 200px; /* Set a maximum height for the suggestion list */
+  overflow-y: auto; /* Add a vertical scrollbar if the list exceeds the max-height */
+}
+
+.autocom-box li {
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.autocom-box li:hover {
+    background-color: #f8f9fa; /* Hover background color for autocomplete items */
+}
+

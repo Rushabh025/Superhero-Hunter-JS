@@ -1,0 +1,21 @@
+.img-responsive {
+    display: block;
+    height: auto;
+    max-width: 100%;
+}
+
+.jumbotron{
+    background-color: #C4D7B2;
+}
+
+.other{
+    background-color: #F5F0BB;
+}
+
+main{
+    background-color: #F5F0BB;
+}
+
+footer{
+    background-color: #F5F0BB;
+}

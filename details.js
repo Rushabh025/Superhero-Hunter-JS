@@ -15,20 +15,14 @@ document.addEventListener('DOMContentLoaded', function () {
     // appending the elements in sequence 
     characterDetailsContainer.appendChild(div)
 
-    const name = document.createElement('h2');
-    name.innerText = data.name;
-    div.appendChild(name)
+    document.getElementById('name').innerHTML = data.name;
 
-    const image = document.createElement('img');
+    document.getElementById('description').innerHTML = data.description;
+
+    const image = document.getElementById('heroImage');
     image.src = data.thumbnail.path +'.jpg';
-    div.appendChild(image)
 
-    const comicsName = document.createElement('h4');
-    comicsName.innerText = `Comics Name`;
-    div.appendChild(comicsName)
-
-    const comicsTable = document.createElement('ul');
-    div.appendChild(comicsTable)
+    const comicsTable = document.getElementById('comicName');
     
     for (let i = 0; i < Object.keys(data.comics.items).length; i++) {
       const comicsList = document.createElement('li');
@@ -36,12 +30,7 @@ document.addEventListener('DOMContentLoaded', function () {
       comicsTable.appendChild(comicsList)
     }
 
-    const seriesName = document.createElement('h4');
-    seriesName.innerText = `Series Name`;
-    div.appendChild(seriesName)
-
-    const seriesTable = document.createElement('ul');
-    div.appendChild(seriesTable)
+    const seriesTable = document.getElementById('seriesName');
 
     for (let i = 0; i < Object.keys(data.series.items).length; i++) {
       const series = document.createElement('li');
@@ -49,12 +38,7 @@ document.addEventListener('DOMContentLoaded', function () {
       seriesTable.appendChild(series)
     }
 
-    const storiesName = document.createElement('h4');
-    storiesName.innerText = `Stories Name`;
-    div.appendChild(storiesName)
-
-    const storiesTable = document.createElement('ul');
-    div.appendChild(storiesTable)
+    const storiesTable = document.getElementById('storiesName');
 
     for (let i = 0; i < Object.keys(data.stories.items).length; i++) {
       const stories = document.createElement('li');
@@ -62,17 +46,17 @@ document.addEventListener('DOMContentLoaded', function () {
       storiesTable.appendChild(stories)
     }
 
-    const eventsName = document.createElement('h4');
-    eventsName.innerText = `Events Name`;
-    div.appendChild(eventsName)
+    // const eventsName = document.createElement('h4');
+    // eventsName.innerText = `Events Name`;
+    // div.appendChild(eventsName)
 
-    const eventsTable = document.createElement('ul');
-    div.appendChild(eventsTable)
+    // const eventsTable = document.createElement('ul');
+    // div.appendChild(eventsTable)
 
-    for (let i = 0; i < Object.keys(data.events.items).length; i++) {
-      const events = document.createElement('li');
-      events.innerText = `${data.events.items[i].name}`
-      eventsTable.appendChild(events)
-    }
+    // for (let i = 0; i < Object.keys(data.events.items).length; i++) {
+    //   const events = document.createElement('li');
+    //   events.innerText = `${data.events.items[i].name}`
+    //   eventsTable.appendChild(events)
+    // }
 
   }
