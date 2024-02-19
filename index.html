@@ -21,11 +21,18 @@
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" onclick="showFavList()">Favourites</a>
-                            <ul id="FavList"></ul>
-                        </li>
+                    <div class="dropdown show">
+                        <a class="btn btn-secondary dropdown-toggle" href="#" onclick="showFavList()" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Favourites
+                        </a>
+                      
+                        <div class="dropdown-menu" id="FavList" aria-labelledby="dropdownMenuLink">
+                          <!-- <a class="dropdown-item" href="#">Action</a> -->
+                          
+                        </div>
+                      </div>
+                    <ul class="navbar-nav ml-auto" >
+                       
                     </ul>
 
                     <form class="form-inline my-2 my-lg-0">

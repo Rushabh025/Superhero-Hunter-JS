@@ -26,10 +26,11 @@ async function getUsers() {
     });
 
     // returning the data
+    // heroList = push(dataList);
     return dataList;
 
   }catch (error) {
-    console.log(error);
+    console.error('Error fetching data:', error);
   }
 }
 
@@ -43,7 +44,7 @@ getUsers().then(dataList => {
   const rowdiv = document.createElement('div');
   rowdiv.classList = 'row';
   cardsContainer.appendChild(rowdiv);
-
+  // console.log(dataList);
     // looping through the data for sowing results on main page
     for (let i = 0; i < Object.keys(dataList.data.results).length; i++) {
 
@@ -62,10 +63,21 @@ getUsers().then(dataList => {
       addButton.addEventListener('click', function (e) {
         e.preventDefault();
         var favHero = dataList.data.results[i].name;
-        favList.push(favHero);
-        // addFavHero(favHero);
-        this.disabled = true;
+      
+        // Check if the superhero is not already in the favorites list
+        if (!favList.includes(favHero)) {
+          // Add superhero to favorites list
+          favList.push(favHero);
+      
+          // Update the favorites list display
+          showFavList();
+        } else {
+          // Handle case where the superhero is already in the favorites list
+          alert(`${favHero} Hero is already in the favorites list.`);
+          // console.log(`${favHero} is already in the favorites list.`);
+        }
       });
+      
 
       const link = document.createElement('a');
       link.href = 'pages/details.html';
@@ -111,23 +123,35 @@ getUsers().then(dataList => {
     }
 });
 
-// Function to update the cart display
+// Function to update the favorite hero display
 const favHeroContainer = document.querySelector('#FavList');
-function showFavList(){
-  if(favList.length == 0){
-    console.log('no list');
-  }else{
-    for(let i = 0; i < favList.length; i++){
-      const li = document.createElement('li');
-      const removeButton = document.createElement('button');
-      li.textContent = favList[i];
-      removeButton.classList = 'btn btn-primary'
-      removeButton.textContent = 'Delete'
-      li.classList.add('characterItem');
-      favHeroContainer.appendChild(li);
-      li.appendChild(removeButton);
-      console.log(favList[i]);
-    }
+function showFavList() {
+  // Clear the current content of favHeroContainer
+  favHeroContainer.innerHTML = '';
+
+  // Update the favorite hero display
+  for (let i = 0; i < favList.length; i++) {
+    const a = document.createElement('a');
+    const icon = document.createElement('img');
+    const removeButton = document.createElement('button');
+    a.textContent = favList[i];
+    removeButton.classList = 'btn cancel btn-link';
+    icon.src = '/delete-icon.png';
+    icon.style = 'height:17px;width:17px;';
+    a.classList = 'dropdown-item';
+    favHeroContainer.appendChild(a);
+    a.appendChild(removeButton);
+    removeButton.appendChild(icon);
+
+    // add a click handler to it which will remove this specific item, `paragraph`:
+    removeButton.addEventListener('click', function() {
+      console.log(a.innerText);
+      const index = favList.indexOf(a.innerText);
+      if (index > -1) { // only splice array when item is found
+        favList.splice(index, 1); // 2nd parameter means remove one item only
+      }
+    });
+
   }
 }
 
@@ -144,29 +168,55 @@ function navigateToDetailsPage(characterData) {
 }
 
 // auto complete
+var heroList = getUsers().then(success => heroList = success);
+function searchdata(character){
+  // console.log(heroList);
+  for (let i = 0; i < Object.keys(heroList.data.results).length; i++) {
+    if(character == heroList.data.results[i].name){
+      navigateToDetailsPage(heroList.data.results[i]);
+    }
+  }
+}
+// Get references to DOM elements
+const searchInput = document.getElementById('searchInput');
+const characterList = document.getElementById('characterList');
 
- // Get references to DOM elements
- const searchInput = document.getElementById('searchInput');
- const characterList = document.getElementById('characterList');
+// Function to filter characters based on search query
+function filterCharacters(query) {
+  // Clear the previous results
+  characterList.innerHTML = '';
 
- // Function to filter characters based on search query
- function filterCharacters(query) {
-   // Clear the previous results
-   characterList.innerHTML = '';
+  // Filter characters that contain the search query
+  const filteredCharacters = characters.filter(character =>
+    character.toLowerCase().includes(query.toLowerCase())
+  );
 
-   // Filter characters that contain the search query
-   const filteredCharacters = characters.filter(character => 
-     character.toLowerCase().includes(query.toLowerCase())
-   );
+  // Display filtered characters
+  filteredCharacters.forEach(character => {
+    const li = document.createElement('li');
+    li.textContent = character;
+    li.classList.add('characterItem');
+    characterList.appendChild(li);
 
-   // Display filtered characters
-   filteredCharacters.forEach(character => {
-     const li = document.createElement('li');
-     li.textContent = character;
-     li.classList.add('characterItem');
-     characterList.appendChild(li);
-   });
- }
+    // Add click event listener to each suggestion item
+    li.addEventListener('click', function () {
+      // Set the value of the search input to the selected character
+      searchInput.value = character;
+      searchdata(character);
+      // Clear the suggestion list
+      characterList.innerHTML = '';
+    });
+  });
+}
+
+// Add event listener for input changes
+searchInput.addEventListener('input', function () {
+  filterCharacters(this.value);
+});
+
+// Initial call to display all characters
+filterCharacters('');
+
 
  // Add event listener for input changes
  searchInput.addEventListener('input', function() {
@@ -175,3 +225,18 @@ function navigateToDetailsPage(characterData) {
 
  // Initial call to display all characters
  filterCharacters('');
+
+ // Debounce function
+function debounce(func, wait) {
+  let timeout;
+  return function (...args) {
+    const context = this;
+    clearTimeout(timeout);
+    timeout = setTimeout(() => func.apply(context, args), wait);
+  };
+}
+
+// Use debounced function for input event
+searchInput.addEventListener('input', debounce(function () {
+  filterCharacters(this.value);
+}, 300)); // Adjust the wait time as needed
