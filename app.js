@@ -100,8 +100,8 @@ getUsers().then(dataList => {
       image.style = 'width:300px;height:300px;'
       cardBackdiv.classList = 'flip-card-back align-items-center';
       heroName.classList = 'card-title card-title-center'
-      link.classList = 'btn btn-primary '
-      addButton.classList = 'btn btn-primary More_Details'
+      link.classList = 'btn btn-primary More_Details'
+      addButton.classList = 'btn btn-primary Fav'
 
       image.src = dataList.data.results[i].thumbnail.path+'.jpg';
       heroName.innerText = `${dataList.data.results[i].name}`

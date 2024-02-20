@@ -63,39 +63,28 @@ We have added the border property to demonstrate that the flip itself goes out o
     margin-bottom: 30px;
   }
 
-  /* 5 */
+  /* Buttons styling */
+  .Fav {
+    background-color: transparent; 
+    color: white; 
+    border: 2px solid white;
+  }
+  
+  .Fav:hover {
+    background-color: #f44336;
+    color: white;
+    border: 3px solid #f44336;
+  }
+
   .More_Details {
-    background: rgb(255,151,0);
-    border: none;
-    z-index: 1;
+    background-color: transparent; 
+    color: white; 
+    border: 2px solid white;
   }
-  .More_Details:after {
-    position: absolute;
-    content: "";
-    width: 100%;
-    height: 0;
-    top: 0;
-    left: 0;
-    z-index: -1;
-    border-radius: 5px;
-    background-color: #eaf818;
-    background-image: linear-gradient(315deg, #eaf818 0%, #f6fc9c 74%);
-     box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
-     7px 7px 20px 0px rgba(0,0,0,.1),
-     4px 4px 5px 0px rgba(0,0,0,.1);
-    transition: all 0.3s ease;
-  }
+  
   .More_Details:hover {
-    color: #000;
-  }
-  .More_Details:hover:after {
-    top: auto;
-    bottom: 0;
-    height: 100%;
-    /* background-color: #eaf818; */
-  }
-  .More_Details:active {
-    top: 2px;
+    background-color: #008CBA;
+    color: white;
   }
   
   /* Navbar */
