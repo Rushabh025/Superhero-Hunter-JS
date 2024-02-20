@@ -1,11 +1,20 @@
-document.addEventListener('DOMContentLoaded', function () {
-    // Retrieve character data from query parameter
-    const urlParams = new URLSearchParams(window.location.search);
-    const characterData = JSON.parse(urlParams.get('characterData'));
+// Retrieve the characterData from sessionStorage
+const characterDataJson = sessionStorage.getItem('characterData');
 
-    // Display character details on the new page
-    displayCharacterDetails(characterData);
-  });
+// Check if characterData is present in sessionStorage
+if (characterDataJson) {
+  // Parse the JSON string to get the characterData object
+  const characterData = JSON.parse(characterDataJson);
+
+  // Now you can use the characterData as needed on the 'details.html' page
+  displayCharacterDetails(characterData);
+
+  // Optional: Clear the characterData from sessionStorage if it's no longer needed
+  sessionStorage.removeItem('characterData');
+} else {
+  // Handle the case where characterData is not present in sessionStorage
+  console.error("Character data not found in sessionStorage.");
+}
 
   function displayCharacterDetails(data) {
     const characterDetailsContainer = document.getElementById('characterdetails');

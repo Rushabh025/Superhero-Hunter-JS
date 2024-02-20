@@ -159,12 +159,13 @@ function displayPersonData(data) {
   console.log(data); // Log the data to the console for now
 }
 
+// used session to store charcter data and access it in details page
 function navigateToDetailsPage(characterData) {
-  const queryParams = new URLSearchParams();
-  queryParams.set('characterData', JSON.stringify(characterData));
+  // Store the characterData in sessionStorage
+  sessionStorage.setItem('characterData', JSON.stringify(characterData));
 
-  // Navigate to the details.html page with query parameters
-  window.location.href = `details.html?${queryParams.toString()}`;
+  // Navigate to the details.html page
+  window.location.href = 'details.html';
 }
 
 // auto complete
@@ -210,15 +211,6 @@ function filterCharacters(query) {
 }
 
 // Add event listener for input changes
-searchInput.addEventListener('input', function () {
-  filterCharacters(this.value);
-});
-
-// Initial call to display all characters
-filterCharacters('');
-
-
- // Add event listener for input changes
  searchInput.addEventListener('input', function() {
    filterCharacters(this.value);
  });
