@@ -7,7 +7,7 @@ async function getUsers() {
   const currentDate = new Date().getTime();
   const hashvalue = CryptoJS.MD5(currentDate+privatekey+publickey).toString();
 
-  const apiUrl = `http://gateway.marvel.com/v1/public/characters?ts=${currentDate}&apikey=${publickey}&hash=${hashvalue}`;
+  const apiUrl = `https://gateway.marvel.com/v1/public/characters?ts=${currentDate}&apikey=${publickey}&hash=${hashvalue}`;
 
   const options = { 
       method: 'GET', 
