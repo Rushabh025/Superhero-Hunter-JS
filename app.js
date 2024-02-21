@@ -136,7 +136,7 @@ function showFavList() {
     const removeButton = document.createElement('button');
     a.textContent = favList[i];
     removeButton.classList = 'btn cancel btn-link';
-    icon.src = '/delete-icon.png';
+    icon.src = 'https://img.icons8.com/ios-glyphs/30/filled-trash.png';
     icon.style = 'height:17px;width:17px;';
     a.classList = 'dropdown-item';
     favHeroContainer.appendChild(a);
