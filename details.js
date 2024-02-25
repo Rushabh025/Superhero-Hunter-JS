@@ -54,18 +54,4 @@ if (characterDataJson) {
       stories.innerText = `${data.stories.items[i].name}`
       storiesTable.appendChild(stories)
     }
-
-    // const eventsName = document.createElement('h4');
-    // eventsName.innerText = `Events Name`;
-    // div.appendChild(eventsName)
-
-    // const eventsTable = document.createElement('ul');
-    // div.appendChild(eventsTable)
-
-    // for (let i = 0; i < Object.keys(data.events.items).length; i++) {
-    //   const events = document.createElement('li');
-    //   events.innerText = `${data.events.items[i].name}`
-    //   eventsTable.appendChild(events)
-    // }
-
   }
