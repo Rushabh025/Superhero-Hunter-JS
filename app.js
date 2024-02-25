@@ -36,7 +36,7 @@ async function getUsers() {
 
 // suggestions array
 const characters = [];
-const favList = [];
+let favList = getFavListFromLocalStorage();
 
 // calling the api function
 getUsers().then(dataList => {
@@ -68,7 +68,7 @@ getUsers().then(dataList => {
         if (!favList.includes(favHero)) {
           // Add superhero to favorites list
           favList.push(favHero);
-      
+          updateLocalStorage();
           // Update the favorites list display
           showFavList();
         } else {
@@ -125,6 +125,8 @@ getUsers().then(dataList => {
 
 // Function to update the favorite hero display
 const favHeroContainer = document.querySelector('#FavList');
+// favList = getFavListFromLocalStorage();
+
 function showFavList() {
   // Clear the current content of favHeroContainer
   favHeroContainer.innerHTML = '';
@@ -143,15 +145,45 @@ function showFavList() {
     a.appendChild(removeButton);
     removeButton.appendChild(icon);
 
-    // add a click handler to it which will remove this specific item, `paragraph`:
-    removeButton.addEventListener('click', function() {
-      console.log(a.innerText);
-      const index = favList.indexOf(a.innerText);
-      if (index > -1) { // only splice array when item is found
-        favList.splice(index, 1); // 2nd parameter means remove one item only
-      }
+    // Add a click handler to remove the hero from favList
+    removeButton.addEventListener('click', function () {
+      removeFromFavList(a.innerText);
+      showFavList();
     });
+  }
+}
 
+// Function to get favList from local storage
+function getFavListFromLocalStorage() {
+  let storedListString = localStorage.getItem('myListKey');
+
+  try {
+    return JSON.parse(storedListString) || [];
+  } catch (error) {
+    console.error('Error parsing local storage data:', error);
+    return [];
+  }
+}
+
+function updateLocalStorage(list) {
+  let myListString = JSON.stringify(list);
+  window.localStorage.setItem('myListKey', myListString);
+}
+
+// Function to add a hero to favList
+function addToFavList(heroName) {
+  if (!favList.includes(heroName)) {
+    favList.push(heroName);
+    updateLocalStorage(favList);
+  }
+}
+
+// Function to remove a hero from favList
+function removeFromFavList(heroName) {
+  let index = favList.indexOf(heroName);
+  if (index !== -1) {
+    favList.splice(index, 1);
+    updateLocalStorage(favList);
   }
 }
 
@@ -186,7 +218,7 @@ searchInput.onkeyup =  (e) => {
 
   // Clear the previous results
   characterList.innerHTML = '';
-  
+
   let userInput = e.target.value;
 
   let url = `https://gateway.marvel.com/v1/public/characters?nameStartsWith=${userInput}&ts=${currentDate}&apikey=${publickey}&hash=${hashvalue}`;
