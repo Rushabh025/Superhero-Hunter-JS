@@ -1,11 +1,11 @@
-// api call function
-async function getUsers() {
-  try {
-
-  const publickey = '9f39169afffeef58dbd798b9c0171075';
+const publickey = '9f39169afffeef58dbd798b9c0171075';
   const privatekey = '71ee64bfae3a3e53f87eedbdac50145bcb1c416a';
   const currentDate = new Date().getTime();
   const hashvalue = CryptoJS.MD5(currentDate+privatekey+publickey).toString();
+
+// api call function
+async function getUsers() {
+  try {
 
   const apiUrl = `http://gateway.marvel.com/v1/public/characters?ts=${currentDate}&apikey=${publickey}&hash=${hashvalue}`;
 
@@ -182,53 +182,40 @@ function searchdata(character){
 const searchInput = document.getElementById('searchInput');
 const characterList = document.getElementById('characterList');
 
-// Function to filter characters based on search query
-function filterCharacters(query) {
+searchInput.onkeyup =  (e) => {
+
   // Clear the previous results
   characterList.innerHTML = '';
+  
+  let userInput = e.target.value;
 
-  // Filter characters that contain the search query
-  const filteredCharacters = characters.filter(character =>
-    character.toLowerCase().includes(query.toLowerCase())
-  );
+  let url = `https://gateway.marvel.com/v1/public/characters?nameStartsWith=${userInput}&ts=${currentDate}&apikey=${publickey}&hash=${hashvalue}`;
 
-  // Display filtered characters
-  filteredCharacters.forEach(character => {
-    const li = document.createElement('li');
-    li.textContent = character;
-    li.classList.add('characterItem');
-    characterList.appendChild(li);
+   // fetch data based on the query provided by user
+   fetch(url)
+   .then((response) => {
+     return response.json();
+   })
+   .then((data) => {
+     console.log(data.data.results);
+     // looping through the data for sowing results on main page
+    for (let i = 0; i < Object.keys(data.data.results).length; i++) {
+      // Display filtered characters
+      const li = document.createElement('li');
+      li.textContent = data.data.results[i].name;;
+      li.classList.add('characterItem');
+      characterList.appendChild(li);
 
-    // Add click event listener to each suggestion item
-    li.addEventListener('click', function () {
-      // Set the value of the search input to the selected character
-      searchInput.value = character;
-      searchdata(character);
-      // Clear the suggestion list
-      characterList.innerHTML = '';
-    });
+      // Add click event listener to each suggestion item
+      li.addEventListener('click', function () {
+        // Set the value of the search input to the selected character
+        navigateToDetailsPage(data.data.results[i]);
+        // Clear the suggestion list
+        characterList.innerHTML = '';
+      });
+    }
+  
   });
+
 }
 
-// Add event listener for input changes
- searchInput.addEventListener('input', function() {
-   filterCharacters(this.value);
- });
-
- // Initial call to display all characters
- filterCharacters('');
-
- // Debounce function
-function debounce(func, wait) {
-  let timeout;
-  return function (...args) {
-    const context = this;
-    clearTimeout(timeout);
-    timeout = setTimeout(() => func.apply(context, args), wait);
-  };
-}
-
-// Use debounced function for input event
-searchInput.addEventListener('input', debounce(function () {
-  filterCharacters(this.value);
-}, 300)); // Adjust the wait time as needed
