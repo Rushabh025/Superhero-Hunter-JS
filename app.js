@@ -67,8 +67,8 @@ getUsers().then(dataList => {
         // Check if the superhero is not already in the favorites list
         if (!favList.includes(favHero)) {
           // Add superhero to favorites list
-          favList.push(favHero);
-          updateLocalStorage();
+          addToFavList(favHero);
+          
           // Update the favorites list display
           showFavList();
         } else {

@@ -12,6 +12,19 @@
     background-color: #F5F0BB;
 }
 
+/* Buttons styling */
+.Fav {
+    background-color: transparent; 
+    color: white; 
+    border: 2px solid white;
+  }
+  
+  .Fav:hover {
+    background-color: #f44336;
+    color: white;
+    border: 3px solid #f44336;
+  }
+
 main{
     background-color: #F5F0BB;
 }

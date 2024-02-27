@@ -12,20 +12,33 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-            <div class="container">
-                <a class="navbar-brand" href="#">Super Hero Hunter</a>
-            </div>
-            <!-- <div class="collapse navbar-collapse" id="navbarNav">
-              <div class="dropdown show">
-                  <a class="btn btn-secondary dropdown-toggle" href="#" onclick="showFavList()" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Favourites
-                  </a>
-                  <div class="dropdown-menu" id="FavList" aria-labelledby="dropdownMenuLink">                    
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">Super Hero Hunter</a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <div class="dropdown show">
+                    <a class="btn btn-secondary dropdown-toggle" href="#" onclick="showFavList()" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Favourites
+                    </a>
+                  
+                    <div class="dropdown-menu" id="FavList" aria-labelledby="dropdownMenuLink">
+                      <!-- <a class="dropdown-item" href="#">Action</a> -->
+                      
+                    </div>
                   </div>
-                </div>
-            </div> -->
-        </nav>
+
+                <form class="form-inline my-2 my-lg-0">
+                    
+                </form>
+            </div>
+        </div>
+    </nav>
     </header>
 
     <main role="main">
@@ -39,6 +52,10 @@
                 <div class=" col-md-6 col-sm-12" >
                     <h1 class="display-3" id = 'name'></h1>
                     <p id = 'description'></p>
+                    <hr class="my-4">
+                    <p class="lead">
+                      <a class="btn btn-primary Fav" href="#" role="button">Add To Favourite</a>
+                    </p>
                 </div>
                 <div class=" col-md">
                     <img class=" img-fluid" id="heroImage" src="http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg">
@@ -83,8 +100,8 @@
     </footer>
 
     <!-- Linking the javascript file -->
+    <script src="app.js"></script>
     <script src="details.js"></script>
-    <!-- <script src="app.js"></script> -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
