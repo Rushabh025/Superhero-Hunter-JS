@@ -55,3 +55,10 @@ if (characterDataJson) {
       storiesTable.appendChild(stories)
     }
   }
+
+function add(){
+  // Parse the JSON string to get the characterData object
+  const characterData = JSON.parse(characterDataJson);
+  addToFavList(characterData.name);
+  // console.log('hi' + characterData.name);
+}
